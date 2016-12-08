@@ -1,8 +1,11 @@
 package com.example.maryam.jishoorg;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Senses {
+public class Senses implements Parcelable{
 
     private ArrayList<String> english_definitions = new ArrayList<>();
     private ArrayList <String> parts_of_speech = new ArrayList<>();
@@ -23,6 +26,60 @@ public class Senses {
     private int infoNum= 0;
     private int sourcesNum= 0;
 
+    Senses (){
+        english_definitions = new ArrayList<>();
+        parts_of_speech = new ArrayList<>();
+        links = new ArrayList<>();
+        tags = new ArrayList<>();
+        restrictions = new ArrayList<>();
+        see_also = new ArrayList<>();
+        antonyms = new ArrayList<>();
+        info = new ArrayList<>();
+        sources = new ArrayList<>();
+        english_definitionsNum = 0;
+        parts_of_speechNum = 0;
+        linksNum= 0;
+        tagsNum= 0;
+        restrictionsNum= 0;
+        see_alsoNum= 0;
+        antonymsNum= 0;
+         infoNum= 0;
+        sourcesNum= 0;
+    }
+
+
+    protected Senses(Parcel in) {
+        english_definitions = in.createStringArrayList();
+        parts_of_speech = in.createStringArrayList();
+        links = in.createStringArrayList();
+        tags = in.createStringArrayList();
+        restrictions = in.createStringArrayList();
+        see_also = in.createStringArrayList();
+        antonyms = in.createStringArrayList();
+        info = in.createStringArrayList();
+        sources = in.createStringArrayList();
+        english_definitionsNum = in.readInt();
+        parts_of_speechNum = in.readInt();
+        linksNum = in.readInt();
+        tagsNum = in.readInt();
+        restrictionsNum = in.readInt();
+        see_alsoNum = in.readInt();
+        antonymsNum = in.readInt();
+        infoNum = in.readInt();
+        sourcesNum = in.readInt();
+    }
+
+    public static final Creator<Senses> CREATOR = new Creator<Senses>() {
+        @Override
+        public Senses createFromParcel(Parcel in) {
+            return new Senses(in);
+        }
+
+        @Override
+        public Senses[] newArray(int size) {
+            return new Senses[size];
+        }
+    };
 
     public void setEnglish_definition (String english_definition){
         english_definitions.add(english_definition);
@@ -113,5 +170,32 @@ public class Senses {
     }
     public int getSourcesNum (){
         return sourcesNum;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeStringList(english_definitions);
+        parcel.writeStringList(parts_of_speech);
+        parcel.writeStringList(links);
+        parcel.writeStringList(tags);
+        parcel.writeStringList(restrictions);
+        parcel.writeStringList(see_also);
+        parcel.writeStringList(antonyms);
+        parcel.writeStringList(info);
+        parcel.writeStringList(sources);
+        parcel.writeInt(english_definitionsNum);
+        parcel.writeInt(parts_of_speechNum);
+        parcel.writeInt(linksNum);
+        parcel.writeInt(tagsNum);
+        parcel.writeInt(restrictionsNum);
+        parcel.writeInt(see_alsoNum);
+        parcel.writeInt(antonymsNum);
+        parcel.writeInt(infoNum);
+        parcel.writeInt(sourcesNum);
     }
 }

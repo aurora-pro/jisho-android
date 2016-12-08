@@ -1,32 +1,15 @@
 package com.example.maryam.jishoorg;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.StringReader;
 import java.util.ArrayList;
 
-public class Word{
+import static com.example.maryam.jishoorg.Pair.*;
 
-    class Pair {
-        private String word = null;
-        private String reading = null;
+public class Word implements Parcelable{
 
-        Pair (String word, String reading){
-            this.word = word;
-            this.reading = reading;
-        }
-
-        public void setWord (String word){
-            this.word = word;
-        }
-        public void setReading (String reading){
-            this.reading = reading;
-        }
-        public String getWord (){
-            return word;
-        }
-        public String getReading (){
-            return reading;
-        }
-    }
 
     private boolean is_common = false;
     private ArrayList <String> tags = new ArrayList<>();
@@ -35,6 +18,38 @@ public class Word{
     private int tagsNum = 0;
     private int japaneseNum = 0;
     private int sensesNum = 0;
+
+    Word (){
+      is_common = false;
+        tags = new ArrayList<>();
+       japanese = new ArrayList<>();
+        senses = new ArrayList<>();
+       tagsNum = 0;
+      japaneseNum = 0;
+         sensesNum = 0;
+    }
+
+    protected Word(Parcel in) {
+        is_common = in.readByte() != 0;
+        tags = in.createStringArrayList();
+        japanese = in.createTypedArrayList(Pair.CREATOR);
+        senses = in.createTypedArrayList(Senses.CREATOR);
+        tagsNum = in.readInt();
+        japaneseNum = in.readInt();
+        sensesNum = in.readInt();
+    }
+
+    public static final Creator<Word> CREATOR = new Creator<Word>() {
+        @Override
+        public Word createFromParcel(Parcel in) {
+            return new Word(in);
+        }
+
+        @Override
+        public Word[] newArray(int size) {
+            return new Word[size];
+        }
+    };
 
     public void setIs_common (boolean is_common){
         this.is_common = is_common;
@@ -74,6 +89,21 @@ public class Word{
         return sensesNum;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeByte((byte) (is_common ? 1 : 0));
+        parcel.writeStringList(tags);
+        parcel.writeTypedList(japanese);
+        parcel.writeTypedList(senses);
+        parcel.writeInt(tagsNum);
+        parcel.writeInt(japaneseNum);
+        parcel.writeInt(sensesNum);
+    }
 }
 
 

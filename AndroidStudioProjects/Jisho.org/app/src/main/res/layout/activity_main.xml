@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#FCFDFE"
     tools:context="com.example.maryam.jishoorg.MainActivity">
 
     <Button
@@ -46,8 +47,8 @@
         android:layout_below="@+id/Search"
         android:layout_toStartOf="@+id/Search"
         android:layout_marginTop="20dp"
-        android:layout_alignRight="@+id/Search"
-        android:layout_alignEnd="@+id/Search"
-        android:id="@+id/Data" />
+        android:id="@+id/Data"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

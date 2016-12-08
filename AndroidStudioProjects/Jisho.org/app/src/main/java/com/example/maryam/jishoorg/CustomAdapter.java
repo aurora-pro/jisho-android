@@ -31,7 +31,7 @@ public class CustomAdapter extends ArrayAdapter <Word>{
         TextView reading = (TextView) view.findViewById(R.id.reading);
 
         Word newWord = getItem(position);
-        Word.Pair pair = newWord.getJapanese(0);
+        Pair pair = newWord.getJapanese(0);
         word.setText(pair.getWord());
         reading.setText(pair.getReading());
 

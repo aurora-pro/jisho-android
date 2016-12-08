@@ -15,7 +15,7 @@
         android:textStyle="bold"
         android:textColor="?android:attr/textColorPrimary"
         android:elegantTextHeight="false"
-        android:textSize="24sp" />
+        android:textSize="30sp" />
 
     <TextView
         android:text="reading"
